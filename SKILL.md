@@ -32,6 +32,60 @@ This is a **self-contained skill**. All methodology, design systems, and slide p
 
 ---
 
+## Commands
+
+Commands are shortcuts that let the user jump directly to any phase, action, or utility. When a user types a command, execute it immediately — don't ask for confirmation unless the command's description says to.
+
+### Quick Reference
+
+```
+PIPELINE                          ACTION                           UTILITY
+/skill:start    full pipeline     /skill:review    review output   /skill:status   where am I?
+/skill:story    Phase 1 only      /skill:adjust    edit slides     /skill:help     list commands
+/skill:slides   Phase 2 only      /skill:palette   change colors   /skill:qa       quality check
+/skill:convert  Phase 3 only      /skill:remap     reassign types  /skill:export   save all files
+```
+
+### Pipeline Commands
+
+| Command | Action |
+|---------|--------|
+| `/skill:start` | **Run the full pipeline from scratch.** Begin Phase 1 (empathy interview). Equivalent to saying "cria uma apresentação sobre X". If the user provides a topic or brief alongside the command, use that as input. |
+| `/skill:story` | **Run Phase 1 only.** Start the strategic storytelling process — empathy interview, pyramid structure, MECE validation, storyline draft. Stop at Checkpoint 1 for review. Use when the user already knows they want to work on the narrative first. |
+| `/skill:slides` | **Run Phase 2 only.** Ask for palette/font preferences, then build HTML slides. If no storyline exists yet, ask the user for content (action titles, data, exhibit hints) before building. If a storyline was already approved in this conversation, use it automatically. Stop at Checkpoint 2. |
+| `/skill:convert` | **Run Phase 3 only.** Convert existing HTML slides to .pptx. If slides exist in the working directory, convert them. If not, ask the user where the slide files are. Ask whether to convert all slides or only changed ones. |
+
+### Action Commands
+
+| Command | Action |
+|---------|--------|
+| `/skill:review` | **Review the current output.** If in Phase 1, re-display the Storyline Package. If in Phase 2, re-display all slides with the Checkpoint 2 options. If in Phase 3, show the conversion summary. Useful when the user wants to see the output again after discussing changes. |
+| `/skill:adjust` | **Adjust specific slides.** Ask which slide numbers to modify and what to change. Regenerate only those slides, keeping the rest intact. Re-present at Checkpoint 2. Works in Phase 2 or after Phase 3 (regenerate HTML then re-convert). |
+| `/skill:adjust N` | **Adjust slide N directly.** Example: `/skill:adjust 5` — jump straight to editing slide 5. Ask the user what to change about that slide. |
+| `/skill:palette` | **Change the color palette.** Present palette options (same interactive flow as Phase 2 Step 1). After selection, regenerate ALL slides with the new palette. This is a global change — every slide gets updated. |
+| `/skill:font` | **Change typography.** Present font pairing options. After selection, regenerate all slides with the new fonts. |
+| `/skill:remap` | **Reassign slide types.** Display the current slide plan (slide number → pattern mapping) and let the user override specific mappings. Example: "slide 7 should be a funnel, not a bar chart". Regenerate affected slides. |
+
+### Utility Commands
+
+| Command | Action |
+|---------|--------|
+| `/skill:status` | **Show pipeline status.** Display which phase is active, what's been completed, what's pending. Show the current palette, font, slide count, and any pending changes. |
+| `/skill:help` | **List all available commands** with short descriptions. Display the Quick Reference table above. |
+| `/skill:qa` | **Run quality checks** on the current slides. Verify: action titles are sentences, visual hierarchy is clear, colors are consistent, text is readable, spacing is even, Chart.js renders, no placeholders, footers have sources, file naming is correct. Report issues found. |
+| `/skill:export` | **Export all deliverables.** Copy all current outputs (HTML slides + .pptx + manifest) to `/mnt/user-data/outputs/` and present them to the user. Useful when the user wants to download everything at once. |
+| `/skill:plan` | **Show the slide plan** without building anything. Display the storyline-to-slide-type mapping as a table: slide number, action title, assigned pattern, exhibit type. Useful for reviewing the plan before committing to building. |
+
+### Command Behavior Rules
+
+1. **Commands work at any point in the conversation.** The user can type `/skill:palette` mid-pipeline and the skill should handle it gracefully — apply the change and resume where they were.
+2. **Commands override the normal flow.** If the user types `/skill:convert` during Phase 1, skip to Phase 3 (but warn if no slides exist yet).
+3. **Commands can be combined with natural language.** `/skill:adjust 3 — muda o gráfico para um donut chart` should work as expected.
+4. **Unknown commands get a helpful response.** If the user types `/skill:something` that doesn't exist, show the help table and suggest the closest match.
+5. **Commands are case-insensitive.** `/skill:Status`, `/SKILL:STATUS`, and `/skill:status` all work.
+
+---
+
 ## How to Run the Pipeline
 
 ### Starting
@@ -201,18 +255,19 @@ Present the .pptx file to the user. The manifest.json is saved alongside the PPT
 
 ## Pipeline State Tracking
 
-The user might give partial instructions, resume after a break, or jump between phases:
+The user might use commands, natural language, or a mix of both. Recognize these patterns:
 
-| User says | Action |
-|-----------|--------|
-| "Cria uma apresentação sobre X" | Full pipeline → Phase 1 |
-| "Já tenho o storyline, faz os slides" | Ask for storyline → Phase 2 |
-| "Muda o slide 5" | Edit specific slide, re-present at Checkpoint 2 |
-| "Quero mudar o argumento B" | Back to Checkpoint 1, revise, regenerate |
-| "Aprovado, gera o PPTX" | Phase 3 → ask scope → run conversion |
-| "Converte só os slides alterados" | Phase 3 with `--manifest` |
-| "Gera tudo do zero" | Phase 3 with full conversion |
-| "Continua de onde paramos" | Check last output, resume |
+| User says | Equivalent command | Action |
+|-----------|-------------------|--------|
+| "Cria uma apresentação sobre X" | `/skill:start` | Full pipeline → Phase 1 |
+| "Já tenho o storyline, faz os slides" | `/skill:slides` | Ask for storyline → Phase 2 |
+| "Muda o slide 5" | `/skill:adjust 5` | Edit specific slide, re-present |
+| "Quero mudar o argumento B" | Back to Phase 1 | Revise storyline, regenerate |
+| "Muda a paleta pra algo mais escuro" | `/skill:palette` | Re-present options, regenerate all |
+| "Aprovado, gera o PPTX" | `/skill:convert` | Phase 3 → ask scope → run |
+| "Converte só os slides alterados" | `/skill:convert` (incremental) | Phase 3 with `--manifest` |
+| "Onde estamos?" | `/skill:status` | Show pipeline state |
+| "Continua de onde paramos" | `/skill:status` then resume | Check last output, continue |
 
 ---
 
