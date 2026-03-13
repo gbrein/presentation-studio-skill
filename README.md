@@ -38,7 +38,7 @@ Download the `.skill` file from [Releases](../../releases) and add it to your Cl
 Clone this repo and point Claude to the `SKILL.md`:
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/presentation-studio.git
+git clone https://github.com/gbrein/presentation-studio.git
 ```
 
 For Phase 3 conversion, install the Node.js dependencies:
