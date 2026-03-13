@@ -272,6 +272,13 @@ The `html2pptx.js` script uses a **semantic-first approach**:
 - **Three-zone anatomy** — Header (action title) → Body (exhibit) → Footer (source + page number)
 - **Layout variation** — Never repeat the same pattern on consecutive slides
 
+### Phase 3 uses a semantic-first conversion approach:
+
+- **Semantic parsing** — Cheerio extracts structured data from HTML slides, preserving text as editable PowerPoint elements wherever possible
+- **Screenshot fallback** — Complex visuals (Chart.js, funnels, pyramids) are rendered via Puppeteer and embedded as images with editable title and footer layers
+- **Change detection** — MD5 manifest tracks which slides changed between runs, enabling incremental re-conversion without rebuilding everything
+- **CLI-first** — Runs as a standalone Node.js script, usable independently from the skill pipeline
+
 ---
 
 ## 🤝 Contributing
