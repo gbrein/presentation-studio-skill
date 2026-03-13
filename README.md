@@ -95,6 +95,8 @@ Just tell Claude what you want to present:
 
 > _"Cria uma apresentação sobre a estratégia de expansão para o mercado europeu"_
 
+Or use the command: `/skill:start`
+
 The skill will:
 1. Interview you about audience, tension, and desired outcome
 2. Build a Pyramid Principle structure with MECE validation
@@ -105,9 +107,11 @@ The skill will:
 
 ### Phase 2 Only (you already have a storyline)
 
-> _"Já tenho o storyline, faz os slides"_
+> _"Já tenho o storyline, faz os slides"_ or `/skill:slides`
 
 ### Phase 3 Only (CLI conversion)
+
+> `/skill:convert` or run the script directly:
 
 ```bash
 # Convert all slides
@@ -124,6 +128,51 @@ node scripts/html2pptx.js --input ./slides/ --output presentation.pptx --only 3,
 node scripts/html2pptx.js --input ./slides/ --output presentation.pptx \
   --title "Board Presentation" --author "Strategy Team"
 ```
+
+---
+
+## 🎮 Commands
+
+All commands use the `/skill:` prefix. They work at any point during the conversation and can be combined with natural language.
+
+```
+PIPELINE                            ACTION                            UTILITY
+/skill:start    full pipeline       /skill:review    review output    /skill:status   where am I?
+/skill:story    Phase 1 only        /skill:adjust    edit slides      /skill:help     list commands
+/skill:slides   Phase 2 only        /skill:palette   change colors    /skill:qa       quality check
+/skill:convert  Phase 3 only        /skill:remap     reassign types   /skill:export   save all files
+                                    /skill:font      change fonts     /skill:plan     show slide plan
+```
+
+### Pipeline Commands
+
+| Command | Description |
+|---------|-------------|
+| `/skill:start` | Run the full pipeline from scratch — Phase 1 through Phase 3 |
+| `/skill:story` | Run Phase 1 only — build strategic storyline, stop at Checkpoint 1 |
+| `/skill:slides` | Run Phase 2 only — build HTML slides from existing content |
+| `/skill:convert` | Run Phase 3 only — convert HTML slides to `.pptx` |
+
+### Action Commands
+
+| Command | Description |
+|---------|-------------|
+| `/skill:review` | Re-display the current output (storyline, slides, or PPTX summary) |
+| `/skill:adjust` | Modify specific slides — asks which ones and what to change |
+| `/skill:adjust N` | Jump straight to editing slide N (e.g., `/skill:adjust 5`) |
+| `/skill:palette` | Change color palette — presents options, regenerates all slides |
+| `/skill:font` | Change typography — presents pairings, regenerates all slides |
+| `/skill:remap` | Override slide type assignments (e.g., "slide 7 → funnel") |
+
+### Utility Commands
+
+| Command | Description |
+|---------|-------------|
+| `/skill:status` | Show current pipeline state, palette, font, slide count |
+| `/skill:help` | List all commands with descriptions |
+| `/skill:qa` | Run quality checks on current slides and report issues |
+| `/skill:export` | Save all files (HTML + PPTX + manifest) to outputs |
+| `/skill:plan` | Preview the slide plan table without building anything |
 
 ---
 
