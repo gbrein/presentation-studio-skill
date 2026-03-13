@@ -31,7 +31,7 @@ Download the `.skill` file from [Releases](../../releases) and add it to your Cl
 
 1. Open **Claude.ai** → **Settings** → **Skills**
 2. Click **Add Skill** and upload `presentation-studio.skill`
-3. Done — say _"cria uma apresentação sobre..."_ to start
+3. Done — say _"create a presentation about..."_ to start
 
 ### Manual Setup
 
@@ -93,7 +93,7 @@ presentation-studio/
 
 Just tell Claude what you want to present:
 
-> _"Cria uma apresentação sobre a estratégia de expansão para o mercado europeu"_
+> _"Create a presentation about our expansion strategy for the European market"_
 
 Or use the command: `/skill:start`
 
@@ -107,7 +107,7 @@ The skill will:
 
 ### Phase 2 Only (you already have a storyline)
 
-> _"Já tenho o storyline, faz os slides"_ or `/skill:slides`
+> _"I already have the storyline, build the slides"_ or `/skill:slides`
 
 ### Phase 3 Only (CLI conversion)
 
