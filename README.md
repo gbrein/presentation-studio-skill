@@ -31,7 +31,7 @@ Download the `.skill` file from [Releases](../../releases) and add it to your Cl
 
 1. Open **Claude.ai** → **Settings** → **Skills**
 2. Click **Add Skill** and upload `presentation-studio.skill`
-3. Done — say _"cria uma apresentação sobre..."_ to start
+3. Done — say _"create a presentation about..."_ to start
 
 ### Manual Setup
 
@@ -93,7 +93,7 @@ presentation-studio/
 
 Just tell Claude what you want to present:
 
-> _"Cria uma apresentação sobre a estratégia de expansão para o mercado europeu"_
+> _"Create a presentation about our expansion strategy for the European market"_
 
 Or use the command: `/skill:start`
 
@@ -107,7 +107,7 @@ The skill will:
 
 ### Phase 2 Only (you already have a storyline)
 
-> _"Já tenho o storyline, faz os slides"_ or `/skill:slides`
+> _"I already have the storyline, build the slides"_ or `/skill:slides`
 
 ### Phase 3 Only (CLI conversion)
 
@@ -271,6 +271,13 @@ The `html2pptx.js` script uses a **semantic-first approach**:
 - **Exhibit-driven** — Visual proof (charts, tables, frameworks) dominates; bullets are a last resort
 - **Three-zone anatomy** — Header (action title) → Body (exhibit) → Footer (source + page number)
 - **Layout variation** — Never repeat the same pattern on consecutive slides
+
+### Phase 3 uses a semantic-first conversion approach:
+
+- **Semantic parsing** — Cheerio extracts structured data from HTML slides, preserving text as editable PowerPoint elements wherever possible
+- **Screenshot fallback** — Complex visuals (Chart.js, funnels, pyramids) are rendered via Puppeteer and embedded as images with editable title and footer layers
+- **Change detection** — MD5 manifest tracks which slides changed between runs, enabling incremental re-conversion without rebuilding everything
+- **CLI-first** — Runs as a standalone Node.js script, usable independently from the skill pipeline
 
 ---
 
