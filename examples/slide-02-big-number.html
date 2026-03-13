@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1280">
+<title>Slide 02 - KPIs</title>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@400;600;700&family=Source+Sans+3:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  :root {
+    --color-dark: #0D2B33; --color-dark-muted: #2A5561;
+    --color-light: #FFFFFF; --color-light-muted: #F0F7F9;
+    --color-accent: #028090; --color-accent-light: #E0F4F7;
+    --color-accent-dark: #016670; --color-positive: #2F855A;
+    --color-negative: #C53030; --color-muted: #7AABB5;
+    --color-border: #C8DFE4;
+    --font-heading: 'Source Serif 4', Georgia, serif;
+    --font-body: 'Source Sans 3', Calibri, sans-serif;
+    --space-unit: 24px;
+  }
+  html, body { width: 1280px; height: 720px; overflow: hidden; font-family: var(--font-body); color: var(--color-dark); background: var(--color-light); -webkit-font-smoothing: antialiased; }
+  .slide { width: 1280px; height: 720px; position: relative; display: flex; flex-direction: column; }
+  .slide-header { padding: var(--space-unit) 48px 12px 48px; min-height: 80px; }
+  .slide-body { flex: 1; padding: 0 48px; display: flex; overflow: hidden; }
+  .slide-footer { padding: 8px 48px 16px 48px; display: flex; justify-content: space-between; align-items: center; min-height: 40px; }
+  .action-title { font-family: var(--font-heading); font-size: 22px; font-weight: 700; color: var(--color-dark); line-height: 1.3; padding-bottom: 12px; border-bottom: 2px solid var(--color-accent); }
+  .source { font-size: 10px; color: var(--color-muted); font-style: italic; }
+  .page-number { font-size: 10px; color: var(--color-muted); font-weight: 600; }
+  .metric-card { text-align: center; padding: var(--space-unit); display: flex; flex-direction: column; justify-content: center; }
+  .metric-card .value { font-family: var(--font-heading); font-size: 52px; font-weight: 700; color: var(--color-accent); line-height: 1.1; }
+  .metric-card .label { font-size: 16px; font-weight: 600; color: var(--color-dark); margin-top: 10px; }
+  .metric-card .sublabel { font-size: 13px; color: var(--color-muted); margin-top: 4px; }
+  .trend-positive { color: var(--color-positive); font-weight: 600; font-size: 14px; margin-top: 6px; }
+</style>
+</head>
+<body>
+  <div class="slide">
+    <div class="slide-header">
+      <h1 class="action-title">Capacidade instalada global de renováveis atingiu recorde em 2025, liderada por solar e eólica</h1>
+    </div>
+    <div class="slide-body" style="align-items: center; justify-content: center;">
+      <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: var(--space-unit); width: 100%;">
+        <div class="metric-card">
+          <div class="value">3.870 GW</div>
+          <div class="label">Capacidade Instalada Total</div>
+          <div class="sublabel">Solar + Eólica + Hidro + Outras</div>
+          <div class="trend-positive">▲ +14% vs. 2024</div>
+        </div>
+        <div class="metric-card" style="border-left: 1px solid var(--color-border); border-right: 1px solid var(--color-border);">
+          <div class="value">US$495B</div>
+          <div class="label">Investimento Global</div>
+          <div class="sublabel">Novo recorde histórico</div>
+          <div class="trend-positive">▲ +22% vs. 2024</div>
+        </div>
+        <div class="metric-card">
+          <div class="value">38%</div>
+          <div class="label">Share na Matriz Elétrica</div>
+          <div class="sublabel">vs. 30% em 2020</div>
+          <div class="trend-positive">▲ +8pp em 5 anos</div>
+        </div>
+      </div>
+    </div>
+    <div class="slide-footer">
+      <span class="source">Fonte: IRENA Renewable Capacity Statistics 2025; IEA World Energy Outlook</span>
+      <span class="page-number">02</span>
+    </div>
+  </div>
+</body>
+</html>

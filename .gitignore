@@ -1,0 +1,5 @@
+node_modules/
+.screenshots/
+*.pptx
+*-manifest.json
+.DS_Store

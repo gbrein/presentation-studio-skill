@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1280">
+<title>Slide 04 - Table</title>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@400;600;700&family=Source+Sans+3:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  :root {
+    --color-dark: #0D2B33; --color-dark-muted: #2A5561;
+    --color-light: #FFFFFF; --color-light-muted: #F0F7F9;
+    --color-accent: #028090; --color-accent-light: #E0F4F7;
+    --color-accent-dark: #016670; --color-positive: #2F855A;
+    --color-negative: #C53030; --color-muted: #7AABB5;
+    --color-border: #C8DFE4; --color-alt-row: #F5FAFB;
+    --font-heading: 'Source Serif 4', Georgia, serif;
+    --font-body: 'Source Sans 3', Calibri, sans-serif;
+    --space-unit: 24px;
+  }
+  html, body { width: 1280px; height: 720px; overflow: hidden; font-family: var(--font-body); color: var(--color-dark); background: var(--color-light); -webkit-font-smoothing: antialiased; }
+  .slide { width: 1280px; height: 720px; position: relative; display: flex; flex-direction: column; }
+  .slide-header { padding: var(--space-unit) 48px 12px 48px; min-height: 80px; }
+  .slide-body { flex: 1; padding: 0 48px; display: flex; overflow: hidden; }
+  .slide-footer { padding: 8px 48px 16px 48px; display: flex; justify-content: space-between; align-items: center; min-height: 40px; }
+  .action-title { font-family: var(--font-heading); font-size: 22px; font-weight: 700; color: var(--color-dark); line-height: 1.3; padding-bottom: 12px; border-bottom: 2px solid var(--color-accent); }
+  .source { font-size: 10px; color: var(--color-muted); font-style: italic; }
+  .page-number { font-size: 10px; color: var(--color-muted); font-weight: 600; }
+  table.data-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  table.data-table th { background: var(--color-dark); color: var(--color-light); font-weight: 600; padding: 10px 14px; text-align: left; font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px; }
+  table.data-table td { padding: 10px 14px; border-bottom: 1px solid var(--color-border); }
+  table.data-table tr:nth-child(even) td { background: var(--color-alt-row); }
+  table.data-table .highlight { font-weight: 700; color: var(--color-accent); }
+  table.data-table .positive { color: var(--color-positive); font-weight: 600; }
+  table.data-table .negative { color: var(--color-negative); font-weight: 600; }
+</style>
+</head>
+<body>
+  <div class="slide">
+    <div class="slide-header">
+      <h1 class="action-title">Solar fotovoltaica lidera em LCOE, velocidade de implantação e potencial de escala entre todas as tecnologias</h1>
+    </div>
+    <div class="slide-body" style="align-items: flex-start; padding-top: 16px;">
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th style="width: 20%;">Tecnologia</th>
+            <th style="width: 16%;">LCOE (US$/MWh)</th>
+            <th style="width: 16%;">Tempo de Implantação</th>
+            <th style="width: 16%;">Fator de Capacidade</th>
+            <th style="width: 16%;">Investimento 2025</th>
+            <th style="width: 16%;">Crescimento 5a</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td style="font-weight: 600;">Solar Fotovoltaica</td>
+            <td class="highlight">US$29</td>
+            <td class="highlight">6-12 meses</td>
+            <td>15-25%</td>
+            <td class="highlight">US$265B</td>
+            <td class="positive">+102%</td>
+          </tr>
+          <tr>
+            <td style="font-weight: 600;">Eólica Onshore</td>
+            <td>US$37</td>
+            <td>12-24 meses</td>
+            <td>25-45%</td>
+            <td>US$85B</td>
+            <td class="positive">+38%</td>
+          </tr>
+          <tr>
+            <td style="font-weight: 600;">Eólica Offshore</td>
+            <td>US$72</td>
+            <td>36-60 meses</td>
+            <td>40-55%</td>
+            <td>US$35B</td>
+            <td class="positive">+65%</td>
+          </tr>
+          <tr>
+            <td style="font-weight: 600;">Hidrelétrica</td>
+            <td>US$44</td>
+            <td>48-84 meses</td>
+            <td>30-60%</td>
+            <td>US$42B</td>
+            <td class="negative">-5%</td>
+          </tr>
+          <tr>
+            <td style="font-weight: 600;">Nuclear</td>
+            <td>US$112</td>
+            <td class="negative">84-180 meses</td>
+            <td class="positive">85-95%</td>
+            <td>US$28B</td>
+            <td class="positive">+12%</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="slide-footer">
+      <span class="source">Fonte: Lazard LCOE Analysis v17; IRENA Cost Database; BloombergNEF</span>
+      <span class="page-number">04</span>
+    </div>
+  </div>
+</body>
+</html>

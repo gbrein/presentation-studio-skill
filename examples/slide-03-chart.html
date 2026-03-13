@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1280">
+<title>Slide 03 - Chart</title>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@400;600;700&family=Source+Sans+3:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  :root {
+    --color-dark: #0D2B33; --color-dark-muted: #2A5561;
+    --color-light: #FFFFFF; --color-light-muted: #F0F7F9;
+    --color-accent: #028090; --color-accent-light: #E0F4F7;
+    --color-accent-dark: #016670; --color-positive: #2F855A;
+    --color-negative: #C53030; --color-muted: #7AABB5;
+    --color-border: #C8DFE4;
+    --font-heading: 'Source Serif 4', Georgia, serif;
+    --font-body: 'Source Sans 3', Calibri, sans-serif;
+    --space-unit: 24px;
+  }
+  html, body { width: 1280px; height: 720px; overflow: hidden; font-family: var(--font-body); color: var(--color-dark); background: var(--color-light); -webkit-font-smoothing: antialiased; }
+  .slide { width: 1280px; height: 720px; position: relative; display: flex; flex-direction: column; }
+  .slide-header { padding: var(--space-unit) 48px 12px 48px; min-height: 80px; }
+  .slide-body { flex: 1; padding: 0 48px; display: flex; overflow: hidden; }
+  .slide-footer { padding: 8px 48px 16px 48px; display: flex; justify-content: space-between; align-items: center; min-height: 40px; }
+  .action-title { font-family: var(--font-heading); font-size: 22px; font-weight: 700; color: var(--color-dark); line-height: 1.3; padding-bottom: 12px; border-bottom: 2px solid var(--color-accent); }
+  .source { font-size: 10px; color: var(--color-muted); font-style: italic; }
+  .page-number { font-size: 10px; color: var(--color-muted); font-weight: 600; }
+  .chart-container { position: relative; width: 100%; height: 100%; padding: 12px 0; }
+</style>
+</head>
+<body>
+  <div class="slide">
+    <div class="slide-header">
+      <h1 class="action-title">Investimento em energia solar superou todas as outras fontes combinadas pela primeira vez em 2025</h1>
+    </div>
+    <div class="slide-body">
+      <div class="chart-container">
+        <canvas id="barChart"></canvas>
+      </div>
+    </div>
+    <div class="slide-footer">
+      <span class="source">Fonte: BloombergNEF Global Energy Investment 2025; valores em US$ bilhões</span>
+      <span class="page-number">03</span>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+  <script>
+    Chart.defaults.font.family = "'Source Sans 3', Calibri, sans-serif";
+    Chart.defaults.font.size = 12;
+    Chart.defaults.color = '#2A5561';
+
+    new Chart(document.getElementById('barChart'), {
+      type: 'bar',
+      data: {
+        labels: ['2019', '2020', '2021', '2022', '2023', '2024', '2025'],
+        datasets: [
+          {
+            label: 'Solar',
+            data: [131, 148, 192, 244, 308, 382, 265],
+            backgroundColor: '#028090',
+            borderRadius: 3,
+            barPercentage: 0.7
+          },
+          {
+            label: 'Eólica',
+            data: [138, 142, 156, 175, 194, 110, 120],
+            backgroundColor: '#016670',
+            borderRadius: 3,
+            barPercentage: 0.7
+          },
+          {
+            label: 'Outras Renováveis',
+            data: [62, 58, 64, 72, 80, 48, 55],
+            backgroundColor: '#7AABB5',
+            borderRadius: 3,
+            barPercentage: 0.7
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: {
+            display: true,
+            position: 'top',
+            align: 'end',
+            labels: { padding: 24, usePointStyle: true, pointStyleWidth: 10, font: { size: 12, weight: '500' } }
+          },
+          tooltip: {
+            backgroundColor: '#0D2B33',
+            titleFont: { size: 13, weight: '600' },
+            bodyFont: { size: 12 },
+            padding: 12,
+            cornerRadius: 4,
+            callbacks: {
+              label: function(ctx) { return ctx.dataset.label + ': US$' + ctx.parsed.y + 'B'; }
+            }
+          }
+        },
+        scales: {
+          x: {
+            stacked: true,
+            grid: { display: false },
+            ticks: { font: { size: 12 }, color: '#7AABB5' },
+            border: { color: '#C8DFE4' }
+          },
+          y: {
+            stacked: true,
+            grid: { color: '#E0F4F7', lineWidth: 0.8 },
+            ticks: { font: { size: 11 }, color: '#7AABB5', padding: 8, callback: function(v) { return 'US$' + v + 'B'; } },
+            border: { display: false },
+            beginAtZero: true
+          }
+        }
+      }
+    });
+  </script>
+</body>
+</html>
